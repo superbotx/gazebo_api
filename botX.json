@@ -2,6 +2,11 @@
     "name": "gazebo_api",
     "version": "0.0.1",
     "botX_modules": {},
-    "external_modules": {},
+    "external_modules": {
+        "haptica_gazebo": {
+            "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip",
+            "name": "haptica_gazebo"
+        }
+    },
     "source_scripts": []
 }
