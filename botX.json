@@ -3,10 +3,14 @@
         "haptica_gazebo": {
             "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip",
             "name": "haptica_gazebo"
+        },
+        "kinova-ros": {
+            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip",
+            "name": "kinova-ros"
         }
     },
-    "botX_modules": {},
-    "source_scripts": [],
     "name": "gazebo_api",
-    "version": "0.0.1"
+    "source_scripts": [],
+    "version": "0.0.1",
+    "botX_modules": {}
 }
