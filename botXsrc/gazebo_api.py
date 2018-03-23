@@ -59,7 +59,7 @@ class GazeboAPI(BaseComponent):
     def bag_vision(self, duration):
         bag_cmd = 'rosbag record -O vision /camera/depth/image_raw /camera/depth/points'
         bag_cmd_id = external_command_pool.start_command(bag_cmd)
-        print("bagging video data...")
+        print("bagging vision data...")
         time.sleep(duration)
         external_command_pool.end_command(bag_cmd_id)
 
