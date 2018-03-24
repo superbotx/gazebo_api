@@ -14,13 +14,13 @@ def main():
     print (gz.get_environment_status())
 
     # Spend 2s bagging vision data (results in about 1.4s of actual bagged data)
-    gz.bag_vision(2)
+    # gz.bag_vision(2)
     
     # Save an image
     gz.get_image()
     
-    print("shutting down app...")
-    gz.shutdown()
+    # print("shutting down app...")
+    # gz.shutdown()
 
 """
 This is the only script that should be running from terminal so that the
