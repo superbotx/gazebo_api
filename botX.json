@@ -1,16 +1,16 @@
 {
-    "external_modules": {
-        "haptica_gazebo": {
-            "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip",
-            "name": "haptica_gazebo"
-        },
-        "kinova-ros": {
-            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip",
-            "name": "kinova-ros"
-        }
-    },
+    "version": "0.0.1",
     "name": "gazebo_api",
     "source_scripts": [],
-    "version": "0.0.1",
-    "botX_modules": {}
+    "botX_modules": {},
+    "external_modules": {
+        "haptica_gazebo": {
+            "name": "haptica_gazebo",
+            "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip"
+        },
+        "kinova-ros": {
+            "name": "kinova-ros",
+            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip"
+        }
+    }
 }

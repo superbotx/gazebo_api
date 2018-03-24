@@ -11,7 +11,7 @@ class GazeboAPI(BaseComponent):
         """
         download .gazebo from github url and put it in absolute path
         """
-        command = 'roslaunch haptica_gazebo demo_world.launch'
+        command = 'roslaunch haptica_gazebo demo_obj_world.launch'
         self.proc_id = external_command_pool.start_command(command)
         """
         wait until it is lauched
