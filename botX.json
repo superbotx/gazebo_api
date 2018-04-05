@@ -1,32 +1,40 @@
 {
     "external_modules": {
-        "gazebo_ros_pkgs": {
-            "name": "gazebo_ros_pkgs",
-            "url": "https://github.com/ros-simulation/gazebo_ros_pkgs/archive/kinetic-devel.zip"
-        },
         "realtime_tools": {
-            "name": "realtime_tools",
-            "url": "https://github.com/ros-controls/realtime_tools/archive/kinetic-devel.zip"
-        },
-        "haptica_gazebo": {
-            "name": "haptica_gazebo",
-            "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip"
-        },
-        "ros_control": {
-            "name": "ros_control",
-            "url": "https://github.com/ros-controls/ros_control/archive/kinetic-devel.zip"
-        },
-        "kinova-ros": {
-            "name": "kinova-ros",
-            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip"
+            "url": "https://github.com/ros-controls/realtime_tools/archive/kinetic-devel.zip",
+            "name": "realtime_tools"
         },
         "control_toolbox": {
-            "name": "control_toolbox",
-            "url": "https://github.com/ros-controls/control_toolbox/archive/kinetic-devel.zip"
+            "url": "https://github.com/ros-controls/control_toolbox/archive/kinetic-devel.zip",
+            "name": "control_toolbox"
+        },
+        "ros_control": {
+            "url": "https://github.com/ros-controls/ros_control/archive/kinetic-devel.zip",
+            "name": "ros_control"
+        },
+        "moveit_resources": {
+            "url": "https://github.com/ros-planning/moveit_resources/archive/master.zip",
+            "name": "moveit_resources"
+        },
+        "gazebo_ros_pkgs": {
+            "url": "https://github.com/ros-simulation/gazebo_ros_pkgs/archive/kinetic-devel.zip",
+            "name": "gazebo_ros_pkgs"
+        },
+        "moveit": {
+            "url": "https://github.com/ros-planning/moveit/archive/kinetic-devel.zip",
+            "name": "moveit"
+        },
+        "haptica_gazebo": {
+            "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip",
+            "name": "haptica_gazebo"
+        },
+        "kinova-ros": {
+            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip",
+            "name": "kinova-ros"
         }
     },
-    "name": "gazebo_api",
     "source_scripts": [],
-    "botX_modules": {},
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "name": "gazebo_api",
+    "botX_modules": {}
 }
