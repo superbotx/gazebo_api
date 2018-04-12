@@ -1,8 +1,8 @@
 from botX.components import BaseComponent
 from botX.applications import external_command_pool
-import rospy
-from rosgraph_msgs.msg import Clock
-from sensor_msgs.msg import Image, PointCloud2
+# import rospy
+# from rosgraph_msgs.msg import Clock
+# from sensor_msgs.msg import Image, PointCloud2
 import time
 
 class GazeboAPI(BaseComponent):
@@ -16,11 +16,11 @@ class GazeboAPI(BaseComponent):
         """
         wait until it is lauched
         """
-        self.buf = []
-        rospy.init_node('listener')
-        rospy.Subscriber("clock", Clock, self.cache_info)
-        rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
-        rospy.Subscriber("/camera/depth/points", Image, self.cache_info)
+        # self.buf = []
+        # rospy.init_node('listener')
+        # rospy.Subscriber("clock", Clock, self.cache_info)
+        # rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
+        # rospy.Subscriber("/camera/depth/points", Image, self.cache_info)
         """
         wait until it is receiving
         """
@@ -38,7 +38,7 @@ class GazeboAPI(BaseComponent):
 
     def get_image(self):
         image = [x[0] for x in self.buf if x[1] is Image]
-        
+
         # Intialize the image_saver node
         # image_saver = 'rosrun image_view image_saver image:=/camera/depth/image_raw _save_all_image:=false _encoding:=32UF1 _filename_format:=foo.tiff __name:=image_saver'
         # self.image_saver_id = external_command_pool.start_command(image_saver)
@@ -50,11 +50,11 @@ class GazeboAPI(BaseComponent):
         # self.depth_image_saver_id = external_command_pool.start_command(depth_image_saver)
         depth_image_viewer = 'rosrun image_view image_view image:=/camera/depth/image_raw __name:=depth_image_viewer'
         self.depth_image_viewer_id = external_command_pool.start_command(depth_image_viewer)
-        
+
         # Pause to allow the image_saver node to run
         time.sleep(1)
 
-        # Call to save a single image 
+        # Call to save a single image
         # save_image = 'rosservice call /image_saver/save'
         # self.save_image_id = external_command_pool.start_command(save_image)
         print("getting image...")
@@ -65,7 +65,7 @@ class GazeboAPI(BaseComponent):
         # save_depth_image = 'rosservice call /depth_image_saver/save'
         # self.save_depth_image_id = external_command_pool.start_command(save_depth_image)
         # print("getting depth image...")
-        
+
         # Pause to allow image to save before process gets shut down
         time.sleep(2)
 
@@ -86,7 +86,7 @@ class GazeboAPI(BaseComponent):
 
 
     def get_clock(self):
-        
+
         pass
 
     def shutdown(self):

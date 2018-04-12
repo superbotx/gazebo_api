@@ -9,16 +9,16 @@ def main():
     gz = botXexport['gazebo_api']['module']()
     gz.setup()
 
-    print (gz.get_environment_status())
-    time.sleep(5)
-    print (gz.get_environment_status())
+    # print (gz.get_environment_status())
+    # time.sleep(5)
+    # print (gz.get_environment_status())
 
     # Spend 2s bagging vision data (results in about 1.4s of actual bagged data)
     # gz.bag_vision(2)
-    
+
     # Save an image
-    gz.get_image()
-    
+    # gz.get_image()
+
     # print("shutting down app...")
     # gz.shutdown()
 
