@@ -1,9 +1,12 @@
 from botX.components import BaseComponent
 from botX.applications import external_command_pool
-# import rospy
+from botX.utils.install_util import maybe_download_git
+from socketIO_client import SocketIO, BaseNamespace
+from threading import Thread
 # from rosgraph_msgs.msg import Clock
 # from sensor_msgs.msg import Image, PointCloud2
 import time
+import os
 
 class GazeboAPI(BaseComponent):
 
@@ -11,22 +14,40 @@ class GazeboAPI(BaseComponent):
         """
         download .gazebo from github url and put it in absolute path
         """
+        maybe_download_git('https://github.com/superbotx/.gazebo/archive/master.zip', os.environ['HOME'], '.gazebo')
         command = 'roslaunch haptica_gazebo demo_obj_world.launch'
-        self.proc_id = external_command_pool.start_command(command)
+        # self.proc_id = external_command_pool.start_command(command)
         """
         wait until it is lauched
         """
-        # self.buf = []
-        # rospy.init_node('listener')
-        # rospy.Subscriber("clock", Clock, self.cache_info)
-        # rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
-        # rospy.Subscriber("/camera/depth/points", Image, self.cache_info)
+        self.buf = []
+        self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
+        self.listener_t.start()
         """
         wait until it is receiving
         """
 
+    def listen_to_bridge(self, topic_list):
+        print(topic_list)
+        socketIO = SocketIO('localhost', 5000, BaseNamespace)
+        print('socket created')
+        socketIO.on('connect', self.on_connect)
+        socketIO.on('ros_message', self.on_ros_message, path='/chatter')
+        socketIO.on('ros_message', self.cache_info, path='/clock')
+        socketIO.on('ros_message', self.cache_info, path='/camera/depth/image_raw')
+        socketIO.on('ros_message', self.cache_info, path='/camera/depth/points')
+        socketIO.wait()
+
+    def on_ros_message(*args):
+        print('on_ros_message: ')
+        for arg in args:
+            print(arg)
+
+    def on_connect(self):
+        print('connected')
+
     def cache_info(self, msg):
-        # print("Message: ", msg)
+        print("Message: ", msg)
         self.buf.append([msg, type(msg)])
         return
 
@@ -86,7 +107,6 @@ class GazeboAPI(BaseComponent):
 
 
     def get_clock(self):
-
         pass
 
     def shutdown(self):

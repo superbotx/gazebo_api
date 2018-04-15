@@ -31,9 +31,9 @@ documentation generation.
 
 Modify the following variable to your needs
 """
-import sys
-sys.path.append('botXsrc')
-from gazebo_api import GazeboAPI
+# import sys
+# sys.path.append('botXsrc')
+from .gazebo_api import GazeboAPI
 
 botXexport = {
     'gazebo_api': {
