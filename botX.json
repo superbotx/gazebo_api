@@ -1,15 +1,4 @@
 {
-<<<<<<< HEAD
-    "version": "0.0.1",
-    "external_modules": {
-        "moveit": {
-            "url": "https://github.com/ros-planning/moveit/archive/kinetic-devel.zip",
-            "name": "moveit"
-        },
-        "gazebo_ros_pkgs": {
-            "url": "https://github.com/ros-simulation/gazebo_ros_pkgs/archive/kinetic-devel.zip",
-            "name": "gazebo_ros_pkgs"
-=======
     "source_scripts": [],
     "name": "gazebo_api",
     "botX_modules": {},
@@ -22,15 +11,10 @@
         "moveit_resources": {
             "name": "moveit_resources",
             "url": "https://github.com/ros-planning/moveit_resources/archive/master.zip"
->>>>>>> 8ea046b75814de20b1970458492d4032000d7c28
         },
-        "control_toolbox": {
-            "url": "https://github.com/ros-controls/control_toolbox/archive/kinetic-devel.zip",
-            "name": "control_toolbox"
-        },
-        "kinova-ros": {
-            "url": "https://github.com/CNURobotics/kinova-ros/archive/kinetic_devel.zip",
-            "name": "kinova-ros"
+        "moveit": {
+            "url": "https://github.com/ros-planning/moveit/archive/kinetic-devel.zip",
+            "name": "moveit"
         },
         "gazebo_ros_pkgs": {
             "name": "gazebo_ros_pkgs",
@@ -40,24 +24,6 @@
             "url": "https://github.com/superbotx/haptica_gazebo/archive/master.zip",
             "name": "haptica_gazebo"
         },
-<<<<<<< HEAD
-        "realtime_tools": {
-            "url": "https://github.com/ros-controls/realtime_tools/archive/kinetic-devel.zip",
-            "name": "realtime_tools"
-        },
-        "moveit_resources": {
-            "url": "https://github.com/ros-planning/moveit_resources/archive/master.zip",
-            "name": "moveit_resources"
-        },
-        "ros_control": {
-            "url": "https://github.com/ros-controls/ros_control/archive/kinetic-devel.zip",
-            "name": "ros_control"
-        }
-    },
-    "name": "gazebo_api",
-    "source_scripts": [],
-    "botX_modules": {}
-=======
         "control_toolbox": {
             "name": "control_toolbox",
             "url": "https://github.com/ros-controls/control_toolbox/archive/kinetic-devel.zip"
@@ -71,5 +37,4 @@
             "url": "https://github.com/ros-controls/ros_control/archive/kinetic-devel.zip"
         }
     }
->>>>>>> 8ea046b75814de20b1970458492d4032000d7c28
 }
