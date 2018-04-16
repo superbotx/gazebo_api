@@ -111,8 +111,8 @@ class GazeboAPI(BaseComponent):
 
     def shutdown(self):
         external_command_pool.end_command(self.proc_id)
-        external_command_pool.end_command(self.image_viewer_id)
-        external_command_pool.end_command(self.depth_image_viewer_id)
+        # external_command_pool.end_command(self.image_viewer_id)
+        # external_command_pool.end_command(self.depth_image_viewer_id)
 
         # external_command_pool.end_command(self.save_image_id)
         # external_command_pool.end_command(self.image_saver_id)
