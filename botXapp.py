@@ -8,6 +8,9 @@ def main():
     print('starting app ...')
     gz = botXexport['gazebo_api']['module']()
     gz.setup()
+    time.sleep(5)
+    images = gz.get_image()
+    print("Images: ", images)
 
     # print (gz.get_environment_status())
     # time.sleep(5)

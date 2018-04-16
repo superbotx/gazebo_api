@@ -3,8 +3,8 @@ from botX.applications import external_command_pool
 from botX.utils.install_util import maybe_download_git
 from socketIO_client import SocketIO, BaseNamespace
 from threading import Thread
-# from rosgraph_msgs.msg import Clock
-# from sensor_msgs.msg import Image, PointCloud2
+from rosgraph_msgs.msg import Clock
+from sensor_msgs.msg import Image, PointCloud2
 import time
 import os
 
@@ -23,6 +23,12 @@ class GazeboAPI(BaseComponent):
         self.buf = []
         self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
         self.listener_t.start()
+
+        rospy.init_node('gazebo_listener')
+        rospy.Subscriber("clock", Clock, self.cache_info)
+        rospy.Subscriber("/camera/image_raw", Image, self.cache_info)
+        rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
+        # rospy.Subscriber("/camera/depth/points", PointCloud2, self.cache_info)
         """
         wait until it is receiving
         """
@@ -34,6 +40,7 @@ class GazeboAPI(BaseComponent):
         socketIO.on('connect', self.on_connect)
         socketIO.on('ros_message', self.on_ros_message, path='/chatter')
         socketIO.on('ros_message', self.cache_info, path='/clock')
+        socketIO.on('ros_message', self.cache_info, path='/camera/image_raw')
         socketIO.on('ros_message', self.cache_info, path='/camera/depth/image_raw')
         socketIO.on('ros_message', self.cache_info, path='/camera/depth/points')
         socketIO.wait()
