@@ -21,8 +21,8 @@ class GazeboAPI(BaseComponent):
         wait until it is lauched
         """
         self.buf = []
-        self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
-        self.listener_t.start()
+        # self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
+        # self.listener_t.start()
 
         rospy.init_node('gazebo_listener')
         rospy.Subscriber("clock", Clock, self.cache_info)
