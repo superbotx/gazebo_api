@@ -16,7 +16,7 @@ class GazeboAPI(BaseComponent):
         """
         maybe_download_git('https://github.com/superbotx/.gazebo/archive/master.zip', os.environ['HOME'], '.gazebo')
         command = 'roslaunch haptica_gazebo demo_obj_world.launch'
-        # self.proc_id = external_command_pool.start_command(command)
+        self.proc_id = external_command_pool.start_command(command)
         """
         wait until it is lauched
         """
