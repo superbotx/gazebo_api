@@ -3,8 +3,11 @@ from botX.applications import external_command_pool
 from botX.utils.install_util import maybe_download_git
 from socketIO_client import SocketIO, BaseNamespace
 from threading import Thread
+
+import rospy
 from rosgraph_msgs.msg import Clock
 from sensor_msgs.msg import Image, PointCloud2
+
 import time
 import os
 
@@ -54,7 +57,9 @@ class GazeboAPI(BaseComponent):
         print('connected')
 
     def cache_info(self, msg):
-        print("Message: ", msg)
+        # print("Message: ", msg)
+        if (len(self.buf) > 50):
+            self.buf.pop(0)
         self.buf.append([msg, type(msg)])
         return
 
