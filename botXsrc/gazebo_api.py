@@ -1,15 +1,17 @@
 from botX.components import BaseComponent
-from botX.applications import external_command_pool
+from botX.applications import external_command_pool, botXimport
 from botX.utils.install_util import maybe_download_git
 from socketIO_client import SocketIO, BaseNamespace
 from threading import Thread
 
 import rospy
 from rosgraph_msgs.msg import Clock
-from sensor_msgs.msg import Image, PointCloud2
+from sensor_msgs.msg import Image, PointCloud2, CameraInfo
 
 import time
 import os
+
+import json
 
 class GazeboAPI(BaseComponent):
 
@@ -24,6 +26,7 @@ class GazeboAPI(BaseComponent):
         wait until it is lauched
         """
         self.buf = []
+        self.json_buf = []
         # self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
         # self.listener_t.start()
 
@@ -31,10 +34,34 @@ class GazeboAPI(BaseComponent):
         rospy.Subscriber("clock", Clock, self.cache_info)
         rospy.Subscriber("/camera/image_raw", Image, self.cache_info)
         rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
+        rospy.Subscriber("/camera/camera_info", CameraInfo, self.cache_info)
+
+        self.server = botXimport('rosbridge_api')['rosbridge_suit_component']['module']()
+        self.server.setup()
+
+        self.server.subscribe(topic='/camera/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
+        self.server.subscribe(topic='/camera/depth/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
+        # self.server.subscribe(topic='/camera/camera_info', type='sensor_msgs/CameraInfo', callback=self.cache_info_bridge)
         # rospy.Subscriber("/camera/depth/points", PointCloud2, self.cache_info)
         """
         wait until it is receiving
         """
+    def cache_info_bridge(self, msg):
+        # print("Message: ", msg)
+        if (len(self.json_buf) > 2000):
+            self.json_buf.pop(0)
+        self.json_buf.append([msg])
+        return
+
+    def get_json_image(self):
+        while not self.json_buf:
+            time.sleep(1)
+        image = [x[0] for x in self.json_buf]
+        im = image[-1:]
+        # im = json.loads(im[0])
+        return im
+
+
 
     def listen_to_bridge(self, topic_list):
         print(topic_list)
@@ -58,7 +85,7 @@ class GazeboAPI(BaseComponent):
 
     def cache_info(self, msg):
         # print("Message: ", msg)
-        if (len(self.buf) > 50):
+        if (len(self.buf) > 200):
             self.buf.pop(0)
         self.buf.append([msg, type(msg)])
         return

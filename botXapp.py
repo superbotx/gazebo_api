@@ -1,5 +1,6 @@
 from botXsrc.botXexport import botXexport
 import time
+import base64, array
 """
 botXexport is a dictionary containing all the reusable components you
 developed for the project, and you will use them in the main program.
@@ -8,9 +9,14 @@ def main():
     print('starting app ...')
     gz = botXexport['gazebo_api']['module']()
     gz.setup()
-    time.sleep(5)
-    images = gz.get_image()
-    print("Images: ", images)
+
+    im = gz.get_json_image()
+    print("JSON Image keys: ", im[0].keys())
+    print("JSON Imade encoding: ", im[0]['encoding'])
+    print("JSON Image: ", bytearray(im[0]['data']))
+    # time.sleep(5)
+    # images = gz.get_image()
+    # print("Images: ", images)
 
     # print (gz.get_environment_status())
     # time.sleep(5)
