@@ -105,6 +105,8 @@ class GazeboAPI(BaseComponent):
         return self.buf[-1:]
 
     def get_image(self):
+        while not self.buf:
+            time.sleep(1)
         image = [x[0] for x in self.buf if x[1] is Image]
 
         # Intialize the image_saver node
