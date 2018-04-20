@@ -25,6 +25,10 @@ class GazeboAPI(BaseComponent):
         self.proc_id = external_command_pool.start_command(command)
         
         # print("SPAWNING ROBOT MODEL INTO GAZEBO")
+        while not rospy.has_param("/robot_description"):
+            time.sleep(1)
+            print("Checking for rosparam /robot_description")
+            
         command2 = "rosrun --prefix 'python2' gazebo_ros spawn_model -urdf -model m1n6s300 -param robot_description -x 0.2 -y -0.6 -z 0.9 -R 0 -P 0 -Y 2.5"
         time.sleep(5)
         # command2 = "rosrun --prefix 'python2' gazebo_ros spawn_model -urdf -model m1n6s300 -param robot_description"
