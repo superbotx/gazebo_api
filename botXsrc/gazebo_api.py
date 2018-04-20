@@ -38,7 +38,10 @@ class GazeboAPI(BaseComponent):
         # self.listener_t = Thread(target=self.listen_to_bridge, kwargs={'topic_list':['/clock','/camera/depth/image_raw','/camera/depth/points']})
         # self.listener_t.start()
 
-        rospy.init_node('gazebo_listener')
+        try:
+            rospy.init_node('gazebo_listener')
+        except:
+            pass
         rospy.Subscriber("clock", Clock, self.cache_info)
         rospy.Subscriber("/camera/image_raw", Image, self.cache_info)
         rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
