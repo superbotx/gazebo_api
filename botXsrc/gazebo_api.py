@@ -20,8 +20,16 @@ class GazeboAPI(BaseComponent):
         download .gazebo from github url and put it in absolute path
         """
         maybe_download_git('https://github.com/superbotx/.gazebo/archive/master.zip', os.environ['HOME'], '.gazebo')
-        command = 'roslaunch haptica_gazebo demo_world.launch'
+        # command = 'roslaunch haptica_gazebo demo_world.launch'
+        command = 'roslaunch haptica_gazebo mico_haptica_demo.launch'
         self.proc_id = external_command_pool.start_command(command)
+        
+        # print("SPAWNING ROBOT MODEL INTO GAZEBO")
+        command2 = 'rosrun gazebo_ros spawn_model -urdf -model m1n6s300 -param robot_description -x 0.2 -y -0.6 -z 0.9 -R 0 -P 0 -Y 2.5'
+        time.sleep(5)
+        # command2 = "rosrun --prefix 'python2' gazebo_ros spawn_model -urdf -model m1n6s300 -param robot_description"
+        self.proc_id2 = external_command_pool.start_command(command2)
+       
         """
         wait until it is lauched
         """
@@ -36,11 +44,11 @@ class GazeboAPI(BaseComponent):
         rospy.Subscriber("/camera/depth/image_raw", Image, self.cache_info)
         rospy.Subscriber("/camera/camera_info", CameraInfo, self.cache_info)
 
-        self.server = botXimport('rosbridge_api')['rosbridge_suit_component']['module']()
-        self.server.setup()
+        # self.server = botXimport('rosbridge_api')['rosbridge_suit_component']['module']()
+        # self.server.setup()
 
-        self.server.subscribe(topic='/camera/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
-        self.server.subscribe(topic='/camera/depth/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
+        # self.server.subscribe(topic='/camera/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
+        # self.server.subscribe(topic='/camera/depth/image_raw', type='sensor_msgs/Image', callback=self.cache_info_bridge)
         # self.server.subscribe(topic='/camera/camera_info', type='sensor_msgs/CameraInfo', callback=self.cache_info_bridge)
         # rospy.Subscriber("/camera/depth/points", PointCloud2, self.cache_info)
         """
